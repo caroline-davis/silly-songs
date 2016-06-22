@@ -4,8 +4,8 @@ import UIKit
 
 var str = "Hello, playground"
 
-/* The shortened name should be all lowercase letters (this way it will fit in with the song)
- Any consonants before the first vowel will be removed; if no vowels exist, then no consonants will be removed */
+// Takes a fullName and removes any consonants before the first vowel
+// Returns the new shortName
 
 func shortNameFromName(fullName: String) -> String {
     var shortName = ""
@@ -18,23 +18,22 @@ func shortNameFromName(fullName: String) -> String {
     return shortName
 }
 
+// Takes a Lyrics Template and implements the fullName and ShortName into the song
 
-shortNameFromName("Zöe")
+func lyricsForName(lyricsTemplate: String, fullName: String) -> String {
+    let shortName = shortNameFromName(fullName)
+    
+    let lyrics = lyricsTemplate.stringByReplacingOccurrencesOfString("<FULL_NAME>", withString: fullName)
+    return lyrics.stringByReplacingOccurrencesOfString("<SHORT_NAME>", withString: shortName)
+}
 
+var fullName = "lenny"
+let bananaFanaTemplate = [
+    "<FULL_NAME>, <FULL_NAME>, Bo B<SHORT_NAME>",
+    "Banana Fana Fo F<SHORT_NAME>",
+    "Me My Mo M<SHORT_NAME>",
+    "<FULL_NAME>"].joinWithSeparator("\n")
 
+print(lyricsForName(bananaFanaTemplate, fullName: fullName))
 
-
-
-///
-
-
-/* Silly Songs
- 
- A function that takes a name and a template:
- 1. Make a shortened version of the name
- 2. Replace <FULL_NAME> in the template with the original name
- 3. Replace <SHORT_NAME> in the template from step 2 with the shortened name
- 4. Return the customized template
- 
-*/
 
